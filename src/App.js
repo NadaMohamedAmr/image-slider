@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+/* eslint-disable jsx-a11y/alt-text */
+
+import { Fragment, useEffect, useRef, useState } from 'react';
 import './App.css';
+import { motion } from 'framer-motion';
+import { arr } from './image';
 
 function App() {
+  const [m, setm] = useState(0)
+  
+  useEffect(() =>{
+  setm(n.current.scrollWidth - n.current.offsetWidth)
+  },[])
+
+  const n = useRef()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+<div className='app'>
+<motion.div  ref={n} className='Container'>
+<motion.div drag="x" dragConstraints= {{right:0, left:-m}} className='inner'>
+{arr.map((e) =>
+(
+  <motion.div className='image'>
+  <img src={e}/> 
+  </motion.div>
+)
+)}
+</motion.div>
+</motion.div>
+</div>
   );
 }
 
